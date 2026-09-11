@@ -2,4 +2,5 @@
 	(version 7)
 	(lib (name "TPS54302DDCR") (type "KiCad") (uri "${KIPRJMOD}/Library/TPS54302DDCR") (options "") (descr ""))
 	(lib (name "XT60-M") (type "KiCad") (uri "${KIPRJMOD}/Library/XT60-M") (options "") (descr ""))
+	(lib (name "footprints") (type "KiCad") (uri "${KIPRJMOD}/Library/MWSA0603S_100MT/KiCADv6/footprints.pretty") (options "") (descr ""))
 )
