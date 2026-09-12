@@ -1,0 +1,49 @@
+(version 1)
+# Production-grade Design Rules for Leiton PCB Standard Pool (6-mil / 0.15mm Class)
+
+# 1. BASELINE MANUFACTURING LIMITS
+(rule "Leiton Global Copper Clearance"
+    (constraint clearance (min 0.15mm))
+    (condition "A.Type == 'Track' || A.Type == 'Pad' || A.Type == 'Zone'"))
+
+(rule "Leiton Global Track Width"
+    (constraint track_width (min 0.15mm))
+    (condition "A.Type == 'Track'"))
+
+(rule "Leiton Via Drill Hole"
+    (constraint hole_size (min 0.20mm))
+    (condition "A.Type == 'Via'"))
+
+(rule "Leiton Via Outer Diameter"
+    (constraint via_diameter (min 0.50mm))
+    (condition "A.Type == 'Via'"))
+
+
+# 2. MECHANICAL & ROUTING DRIFT PREVENTIONS
+(rule "Leiton Drill to Drill Distance"
+    # In KiCad, omitting the condition for hole_to_hole automatically targets all structural drill elements
+    (constraint hole_to_hole (min 0.40mm)))
+
+(rule "Leiton Track to Mechanical Edge"
+    (constraint edge_clearance (min 0.30mm))
+    (condition "A.Type == 'Track'"))
+
+(rule "Leiton Pad to Mechanical Edge"
+    (constraint edge_clearance (min 0.50mm))
+    (condition "A.Type == 'Pad'"))
+
+
+# 3. SOLDERMASK & ENCAPSULATION SAFETY
+(rule "Leiton Soldermask Dam Width"
+    (constraint solder_mask_sliver (min 0.10mm))
+    (condition "A.Layer == '*.Mask'"))
+
+(rule "Leiton Mask Clearance Expansion"
+    (constraint silk_clearance (min 0.08mm))
+    (condition "A.Layer == '*.SilkS'"))
+
+
+# 4. FABRICATION QUALITY & LEGENDS
+(rule "Leiton Silkscreen to Exposed Copper Clearance"
+    (constraint clearance (min 0.15mm))
+    (condition "A.Layer == '*.SilkS' && B.Layer == '*.Mask'"))
